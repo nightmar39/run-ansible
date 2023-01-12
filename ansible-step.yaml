@@ -2,6 +2,7 @@ kind: step-type
 version: '1.0'
 metadata:
   name: anthony-cf/ansible-deploy
+  version: 0.0.7
   title: Ansible Playbook Run
   isPublic: false
   description: Send a message to a Slack user or channel.
@@ -41,6 +42,10 @@ spec:
             "PLAYBOOK_FILE": {
                 "type": "string",
                 "description": "The playbook to run"
+            },
+            "REPO_NAME": {
+                "type": "string",
+                "description": "name of repo with files"
             }
         }
     }
@@ -52,4 +57,7 @@ spec:
         - 'inventory=${{INVENTORY_FILE}}'
         - 'playbook=${{PLAYBOOK_FILE}}'
       commands:
-        - "ansible-playbook $playbook -i $inventory --key-file '/codefresh/volume/id_rsa'"
+        - ls 
+        - pwd
+        - cd "${{REPO_NAME}}"
+        - "ansible-playbook ${{PLAYBOOK_FILE}} -i ${{INVENTORY_FILE}} --key-file '/codefresh/volume/id_rsa'"

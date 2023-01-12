@@ -19,7 +19,7 @@
   tasks: 
   - name: Deploy docker container
     community.docker.docker_container:
-      name: mydata
-      image: busybox
+      name: nginx
+      image: nginx
       volumes:
         - /data

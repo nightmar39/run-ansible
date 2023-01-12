@@ -1,0 +1,52 @@
+kind: step-type
+version: '1.0'
+metadata:
+  name: anthony-cf/ansible-deploy
+  title: Ansible Playbook Run
+  isPublic: false
+  description: Send a message to a Slack user or channel.
+  sources:
+    - >-
+      https://github.com/nightmar39/run-ansible
+  maintainers:
+    - name: Anthony Rozario
+  official: false
+  tags: []
+  icon:
+    type: svg
+    url: https://cdn.jsdelivr.net/gh/codefresh-io/steps/incubating/slack-message-sender/icon.svg
+    background: "#49154B"
+  examples:
+    - description: example-1
+      workflow:
+        sendSlack:
+          type: slack-message-sender
+          arguments:
+            WEBHOOK_URL: http://webhook.com
+            MESSAGE: message
+spec:
+  arguments: |-
+    {
+        "definitions": {},
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "additionalProperties": false,
+        "patterns": [],
+        "required": [],
+        "properties": {
+            "INVENTORY_FILE": {
+                "type": "string",
+                "description": "The inventory file to pass to the arg"
+            },
+            "PLAYBOOK_FILE": {
+                "type": "string",
+                "description": "The playbook to run"
+            }
+        }
+    }
+  steps:
+    main:
+      title: run-ansible-playbook 
+      image: nightmar39/${{CF_REPO_NAME}}:7d04b9c-v2
+      commands:
+        - "ansible-playbook ${{PLAYBOOK_FILE}} -i ${{INVENTORY_FILE}} --key-file '/codefresh/volume/id_rsa'"

@@ -14,7 +14,7 @@ metadata:
   tags: []
   icon:
     type: svg
-    url: https://cdn.jsdelivr.net/gh/codefresh-io/steps/incubating/slack-message-sender/icon.svg
+    url: https://cdn.jsdelivr.net/gh/nightmar39/run-ansible@main/Ansible_logo.svg
     background: "#49154B"
   examples:
     - description: example-1
@@ -48,5 +48,8 @@ spec:
     main:
       title: run-ansible-playbook 
       image: nightmar39/${{CF_REPO_NAME}}:7d04b9c-v2
+      environment: 
+        - 'inventory=${{INVENTORY_FILE}}'
+        - 'playbook=${{PLAYBOOK_FILE}}'
       commands:
-        - "ansible-playbook ${{PLAYBOOK_FILE}} -i ${{INVENTORY_FILE}} --key-file '/codefresh/volume/id_rsa'"
+        - "ansible-playbook $playbook -i $inventory --key-file '/codefresh/volume/id_rsa'"

@@ -1,0 +1,25 @@
+---
+
+- name: Print Hello World
+  hosts: all 
+  remote_user: ec2-user
+
+  tasks: 
+  - name: echo a string
+    ansible.builtin.command:
+      cmd: "echo Hello World" 
+
+
+
+
+- name: Deploy container
+  hosts: all 
+  remote_user: ec2-user
+
+  tasks: 
+  - name: Deploy docker container
+    community.docker.docker_container:
+      name: mydata
+      image: busybox
+      volumes:
+        - /data

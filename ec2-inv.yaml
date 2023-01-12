@@ -1,0 +1,3 @@
+all:
+  hosts: 
+    ec2-3-20-240-102.us-east-2.compute.amazonaws.com

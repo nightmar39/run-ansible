@@ -2,7 +2,7 @@ kind: step-type
 version: '1.0'
 metadata:
   name: anthony-cf/ansible-deploy
-  version: 0.0.7
+  version: 0.0.8
   title: Ansible Playbook Run
   isPublic: false
   description: Send a message to a Slack user or channel.

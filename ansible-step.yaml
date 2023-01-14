@@ -42,22 +42,18 @@ spec:
             "PLAYBOOK_FILE": {
                 "type": "string",
                 "description": "The playbook to run"
-            },
-            "REPO_NAME": {
-                "type": "string",
-                "description": "name of repo with files"
             }
         }
     }
   steps:
     main:
       title: run-ansible-playbook 
-      image: nightmar39/${{CF_REPO_NAME}}:7d04b9c-v2
+      image: nightmar39/run-ansible:7d04b9c-v2
       environment: 
         - 'inventory=${{INVENTORY_FILE}}'
         - 'playbook=${{PLAYBOOK_FILE}}'
       commands:
         - ls 
         - pwd
-        - cd "${{REPO_NAME}}"
+        - cd "${{CF_REPO_NAME}}"
         - "ansible-playbook ${{PLAYBOOK_FILE}} -i ${{INVENTORY_FILE}} --key-file '/codefresh/volume/id_rsa'"
